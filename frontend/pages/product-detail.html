@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Details - MxK Opticals</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+<div class="page">
+
+    <!-- Back Button -->
+    <a href="javascript:history.back()"
+       class="btn btn-outline"
+       style="margin-bottom:25px; font-size:0.85rem; padding:8px 18px; border-radius:20px;">
+        ← Back to Products
+    </a>
+
+    <!-- Loading -->
+    <div id="loading-state" class="empty-state">
+        Fetching product information...
+    </div>
+
+    <!-- Error -->
+    <div id="error-state"
+         class="empty-state"
+         style="display:none; border-color:var(--error); color:var(--error);">
+        Product not found or failed to load details.
+    </div>
+
+    <!-- Product Container -->
+    <div id="product-detail-container"
+         class="product-detail-container"
+         style="display:none;">
+
+        <!-- Left Image -->
+        <div class="product-detail-graphic">
+            <div id="product-detail-icon"
+                 class="product-detail-image-fallback">
+                👓
+            </div>
+        </div>
+
+        <!-- Right Info -->
+        <div class="product-detail-info">
+
+            <span id="product-type-badge"
+                  class="category-chip">
+                Frame
+            </span>
+
+            <h1 id="product-name"
+                class="product-detail-name">
+                Classic Frame
+            </h1>
+
+            <div id="product-brand"
+                 class="product-detail-brand">
+                Brand Name
+            </div>
+
+            <div id="product-price"
+                 class="product-detail-price">
+                ₹0
+            </div>
+
+            <p id="product-desc"
+               class="product-detail-desc">
+                Product description will load here...
+            </p>
+
+            <!-- Specifications -->
+            <div class="product-attributes">
+
+                <h3 style="
+                    font-family:var(--font-heading);
+                    font-size:1.1rem;
+                    margin-bottom:12px;
+                    color:var(--accent);">
+                    Specifications
+                </h3>
+
+                <div id="attributes-table">
+                    <!-- Dynamic -->
+                </div>
+
+            </div>
+
+            <!-- Disclaimer -->
+            <div class="disclaimer-box">
+                ℹ️ For prescription power and custom lens details,
+                our opticians will call/WhatsApp you before shipping.
+            </div>
+
+            <!-- Add Cart -->
+            <button id="add-to-cart-btn"
+                    class="btn btn-primary"
+                    style="
+                    width:100%;
+                    padding:15px;
+                    border-radius:30px;">
+                Add to Shopping Cart
+            </button>
+
+            <!-- Add Prescription -->
+            <button
+                onclick="window.location.href='/pages/prescription.html'"
+                class="btn btn-outline"
+                style="
+                width:100%;
+                padding:15px;
+                border-radius:30px;
+                margin-top:10px;">
+                Add Prescription
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- Scripts -->
+<script src="common.js"></script>
+<script src="product-detail.js"></script>
+
+</body>
+</html>

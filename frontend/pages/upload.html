@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Frames - MxK Opticals</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <main class="page">
+        <h1 class="section-title">Frame Studio Uploader</h1>
+        
+        <div class="upload-container">
+            <!-- Left Side: Form -->
+            <section class="upload-form-section">
+                <h2 class="upload-section-title">Upload New Frame</h2>
+                <form id="frame-upload-form" class="upload-form">
+                    
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="product-name">Frame Name *</label>
+                            <input type="text" id="product-name" class="input" placeholder="e.g. Classic Aviator Gold" required>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="product-brand">Brand Name</label>
+                            <input type="text" id="product-brand" class="input" placeholder="e.g. MxK Opticals" value="MxK Opticals">
+                        </div>
+                    </div>
+                    
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="product-price">Price (₹) *</label>
+                            <input type="number" id="product-price" class="input" placeholder="e.g. 1299" min="0" required>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="product-size">Size *</label>
+                            <select id="product-size" class="input" required>
+                                <option value="" disabled selected>Select Size</option>
+                                <option value="Small">Small</option>
+                                <option value="Medium" selected>Medium</option>
+                                <option value="Large">Large</option>
+                                <option value="Custom">Custom / Free Size</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="product-model-number">Model Number *</label>
+                            <input type="text" id="product-model-number" class="input" placeholder="e.g. MXK-2026-F9" required>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="product-color">Color</label>
+                            <input type="text" id="product-color" class="input" placeholder="e.g. Matte Black, Gold">
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label for="product-material">Material</label>
+                            <input type="text" id="product-material" class="input" placeholder="e.g. Acetate, Titanium">
+                        </div>
+                        
+                        <div class="field">
+                            <label for="product-shape">Shape</label>
+                            <input type="text" id="product-shape" class="input" placeholder="e.g. Rectangular, Round">
+                        </div>
+                    </div>
+
+                    <div class="field">
+                        <label for="product-description">Description</label>
+                        <textarea id="product-description" class="textarea" placeholder="Provide a brief description of the frame..."></textarea>
+                    </div>
+
+                    <!-- Image Drop Area -->
+                    <div class="field">
+                        <label>Frame Photo *</label>
+                        <div class="image-dropzone" id="image-dropzone">
+                            <div class="dropzone-text" id="dropzone-text">
+                                <span>📸 Click or Drag & Drop image here</span>
+                                <span class="dropzone-sub">Supports PNG, JPG, JPEG (Max 5MB)</span>
+                            </div>
+                            <input type="file" id="product-image-file" accept="image/*" style="display: none;" required>
+                            <div class="image-preview-container" id="image-preview-container" style="display: none;">
+                                <img id="image-preview" src="" alt="Frame Preview">
+                                <button type="button" class="btn btn-outline delete-preview-btn" id="delete-preview-btn">Change Image</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 15px; padding: 14px;">
+                        🚀 Upload Frame
+                    </button>
+                </form>
+            </section>
+
+            <!-- Right Side: Session Counter & Uploaded List -->
+            <aside class="upload-sidebar">
+                <div class="progress-box">
+                    <h2 class="sidebar-box-title">Upload Progress</h2>
+                    <div class="progress-stats">
+                        <span class="progress-count" id="session-count">0 / 100</span>
+                        <span class="progress-label">Frames added in this session</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progress-bar-fill" style="width: 0%;"></div>
+                    </div>
+                    <p class="progress-tip">Tip: Upload 100 frames to complete your store directory.</p>
+                </div>
+
+                <div class="uploaded-history-box">
+                    <h3 class="sidebar-box-title">Recent Uploads</h3>
+                    <div class="uploaded-list" id="uploaded-list">
+                        <!-- Filled dynamically via upload.js -->
+                        <div class="empty-history-text" id="empty-history-text">
+                            No frames uploaded in this session yet. Upload your first frame!
+                        </div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="common.js"></script>
+    <script src="upload.js"></script>
+</body>
+</html>

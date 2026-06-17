@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - MxK Opticals</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Razorpay Checkout SDK -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+
+    <div class="page">
+        <h1 class="section-title">Checkout</h1>
+        
+        <div class="checkout-grid">
+            
+            <!-- Left Column: Form Details -->
+            <div class="checkout-section">
+                <h2 class="checkout-subtitle">Your Details</h2>
+                
+                <form id="checkout-form" onsubmit="return false;">
+                    <div class="field">
+                        <label for="cust-name">Full Name*</label>
+                        <input type="text" id="cust-name" class="input" required placeholder="Enter your full name">
+                    </div>
+                    
+                    <div class="field">
+                        <label for="cust-phone">Mobile Number*</label>
+                        <input type="tel" id="cust-phone" class="input" required placeholder="Enter your 10-digit mobile number">
+                    </div>
+                    
+                    <div class="field">
+                        <label for="cust-email">Email Address</label>
+                        <input type="email" id="cust-email" class="input" placeholder="Enter your email address (optional)">
+                    </div>
+                    
+                    <div class="field">
+                        <label for="cust-address">Delivery Address* (or write "Store Pickup")</label>
+                        <textarea id="cust-address" class="textarea" required placeholder="Complete home/office address for shipping, or mention Store Pickup if you will pick up in person."></textarea>
+                        <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 6px;">
+                            🏪 <strong>Store Address for Pickup:</strong> No 1017 A, TH Road, Kaladipet, Thiruvottriyur, Chennai - 600019
+                        </div>
+                    </div>
+                    
+                    <div class="field">
+                        <label for="cust-notes">Prescription / Power Notes (Optional)</label>
+                        <textarea id="cust-notes" class="textarea" placeholder="If you know your cylinder, sphere, axis, or addition details, write them here. We will also call/WhatsApp you to verify."></textarea>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Right Column: Summary & Payment -->
+            <div class="checkout-section" style="display: flex; flex-direction: column; justify-content: space-between;">
+                <div>
+                    <h2 class="checkout-subtitle">Order Summary</h2>
+                    <ul id="summary-items-list" class="checkout-summary-list">
+                        <!-- Populated dynamically via checkout.js -->
+                    </ul>
+                    
+                    <div class="checkout-total-row">
+                        <span>Total amount</span>
+                        <span id="summary-total-amount">₹0</span>
+                    </div>
+                    
+                    <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 25px;">
+                        Secure payments powered by Razorpay. Shop team will contact you to verify lens selection or custom modifications after order placement.
+                    </p>
+                </div>
+                
+                <div>
+                    <div id="payment-message" style="display: none; padding: 12px; border-radius: 8px; font-size: 0.9rem; margin-bottom: 15px;"></div>
+                    <button id="pay-btn" class="btn btn-primary" style="width: 100%; padding: 15px; border-radius: 30px;" disabled>
+                        Pay Securely with Razorpay
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="common.js"></script>
+    <script src="checkout.js"></script>
+</body>
+</html>

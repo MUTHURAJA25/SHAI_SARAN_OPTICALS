@@ -23,6 +23,7 @@ const productSchema = new mongoose.Schema(
       lensType: { type: String }, // e.g., Single Vision, Bifocal
       baseCurve: { type: String }, // mainly for contact lenses
       diameter: { type: String }, // for lenses/contact lenses
+      modelNumber: { type: String }, // model number for frames
     },
     isActive: { type: Boolean, default: true },
   },

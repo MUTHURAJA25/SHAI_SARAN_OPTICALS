@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - MxK Opticals</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <div class="page">
+        <h1 class="section-title">Your Cart</h1>
+        
+        <!-- Cart Contents Container -->
+        <div id="cart-content-section" style="display: none;">
+            <table class="cart-table">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                        <th>Type</th>
+                        <th>Price</th>
+                        <th>Qty</th>
+                        <th>Subtotal</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody id="cart-table-body">
+                    <!-- Populated dynamically via cart.js -->
+                </tbody>
+            </table>
+            
+            <div class="cart-summary">
+                <div>
+                    <span class="cart-total-label">Total Amount</span>
+                    <div id="cart-grand-total" class="cart-total-amount">₹0</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 4px;">
+                        Taxes & shipping will be confirmed by our shop.
+                    </div>
+                </div>
+                <a href="checkout.html" class="btn btn-primary">Proceed to Checkout</a>
+            </div>
+        </div>
+
+        <!-- Empty Cart State -->
+        <div id="cart-empty-section" class="empty-state" style="display: none;">
+            <div style="font-size: 3rem; margin-bottom: 15px;">🛒</div>
+            <h2>Your cart is empty</h2>
+            <p style="margin-top: 8px; margin-bottom: 20px; color: var(--text-muted);">Looks like you haven't added anything to your cart yet.</p>
+            <a href="frames.html" class="btn btn-primary">Browse Frames</a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="common.js"></script>
+    <script src="cart.js"></script>
+</body>
+</html>
