@@ -42,6 +42,29 @@ const orderSchema = new mongoose.Schema(
       signature: { type: String },
     },
     notes: { type: String }, // e.g., prescription details
+    prescription: {
+      patientName: { type: String, default: "" },
+      od_sph: { type: String, default: "" },
+      od_cyl: { type: String, default: "" },
+      od_axis: { type: String, default: "" },
+      od_va: { type: String, default: "" },
+      os_sph: { type: String, default: "" },
+      os_cyl: { type: String, default: "" },
+      os_axis: { type: String, default: "" },
+      os_va: { type: String, default: "" },
+      pd: { type: String, default: "" },
+      near_od_sph: { type: String, default: "" },
+      near_od_cyl: { type: String, default: "" },
+      near_od_axis: { type: String, default: "" },
+      near_od_va: { type: String, default: "" },
+      near_os_sph: { type: String, default: "" },
+      near_os_cyl: { type: String, default: "" },
+      near_os_axis: { type: String, default: "" },
+      near_os_va: { type: String, default: "" },
+      near_pd: { type: String, default: "" },
+      lensType: { type: String, default: "" },
+      coatings: [{ type: String }]
+    },
   },
   { timestamps: true }
 );
