@@ -118,6 +118,11 @@ document.addEventListener("DOMContentLoaded", () => {
         // 4. Bind Add to Cart action
         addToCartBtn.addEventListener("click", () => {
             addToCart(product, 1);
+            if (product && product.type === "frame") {
+                setTimeout(() => {
+                    window.location.href = "prescription.html?redirect=checkout.html";
+                }, 800);
+            }
         });
     }
     

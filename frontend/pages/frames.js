@@ -73,6 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 const product = products.find(p => p._id === id);
                 if (product) {
                     addToCart(product, 1);
+                    setTimeout(() => {
+                        window.location.href = "prescription.html?redirect=checkout.html";
+                    }, 800);
                 }
             });
         });

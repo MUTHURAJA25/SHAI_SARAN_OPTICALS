@@ -124,10 +124,16 @@
         <form id="prescription-form" onsubmit="return false;">
             <div class="prescription-card">
                 
-                <!-- Patient Name Field -->
-                <div class="field" style="margin-bottom: 25px;">
-                    <label for="patient_name" style="font-weight: 600; margin-bottom: 8px; display: block;">Customer / Patient Name *</label>
-                    <input type="text" id="patient_name" class="input" style="width: 100%; border-radius: 25px; background: rgba(15, 23, 42, 0.6);" placeholder="Enter customer or patient's full name" required>
+                <!-- Patient Name & Age Field -->
+                <div class="form-grid" style="margin-bottom: 25px;">
+                    <div class="field" style="margin-bottom: 0;">
+                        <label for="patient_name" style="font-weight: 600; margin-bottom: 8px; display: block;">Customer / Patient Name *</label>
+                        <input type="text" id="patient_name" class="input" style="width: 100%; border-radius: 25px; background: rgba(15, 23, 42, 0.6);" placeholder="Enter customer or patient's full name" required>
+                    </div>
+                    <div class="field" style="margin-bottom: 0;">
+                        <label for="patient_age" style="font-weight: 600; margin-bottom: 8px; display: block;">Patient Age *</label>
+                        <input type="number" id="patient_age" class="input" style="width: 100%; border-radius: 25px; background: rgba(15, 23, 42, 0.6);" placeholder="e.g. 28" min="1" max="120" required>
+                    </div>
                 </div>
 
                 <div class="prescription-section-title">
@@ -226,6 +232,37 @@
                                 <input type="checkbox" id="coat_photochromatic" value="Photochromatic">
                                 <span>Photochromatic (Light-Reactive)</span>
                             </label>
+                        </div>
+                    </div>
+
+                    <!-- Lens Index, Price & Remarks Section -->
+                    <div class="option-box">
+                        <div class="prescription-section-title" style="border-bottom: none; margin-bottom: 10px; padding: 0;">
+                            <span>💎</span> Lens Options & Index
+                        </div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px;">
+                            Specify lens refractive index, lens price, and custom options.
+                        </p>
+                        <div class="form-grid" style="grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px;">
+                            <div class="field" style="margin-bottom: 0;">
+                                <label for="lens-index" style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">Lens Index *</label>
+                                <select id="lens-index" class="input" style="width: 100%; border-radius: 25px;" required>
+                                    <option value="" disabled selected>Select Index</option>
+                                    <option value="1.56">1.56 (Standard)</option>
+                                    <option value="1.61">1.61 (Thin)</option>
+                                    <option value="1.67">1.67 (Super Thin)</option>
+                                    <option value="1.74">1.74 (Ultra Thin)</option>
+                                    <option value="Other/Custom">Other / Custom</option>
+                                </select>
+                            </div>
+                            <div class="field" style="margin-bottom: 0;">
+                                <label for="lens-price" style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">Lens Price (₹) *</label>
+                                <input type="number" id="lens-price" class="input" style="width: 100%; border-radius: 25px; background: rgba(15, 23, 42, 0.6);" placeholder="e.g. 799" min="0" required>
+                            </div>
+                        </div>
+                        <div class="field" style="margin-bottom: 0;">
+                            <label for="lens-remarks" style="font-size: 0.8rem; font-weight: 600; text-transform: uppercase;">Custom Remarks / Options</label>
+                            <input type="text" id="lens-remarks" class="input" style="width: 100%; border-radius: 25px; background: rgba(15, 23, 42, 0.6);" placeholder="e.g. anti-fog, custom tinting, etc.">
                         </div>
                     </div>
                     

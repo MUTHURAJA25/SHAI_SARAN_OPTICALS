@@ -59,21 +59,27 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const icon = currentType === "contact-lens" ? "👁️" : "🔍";
         
-        productGrid.innerHTML = items.map(p => `
-            <div class="product-card" id="card-${p._id}">
-                <div class="product-info">
-                    <div class="product-icon">${icon}</div>
-                    <div class="product-name">${escapeHtml(p.name)}</div>
-                    <div class="product-brand">${escapeHtml(p.brand || 'No Brand')}</div>
-                    <div class="product-price">₹${p.price}</div>
-                    <div class="product-type">${escapeHtml(p.type)}</div>
+        productGrid.innerHTML = items.map(p => {
+            const hasImg = p.images && p.images.length > 0 && p.images[0];
+            const visualHtml = hasImg 
+                ? `<div class="product-image-container"><img src="${p.images[0]}" alt="${escapeHtml(p.name)}" class="product-image" /></div>`
+                : `<div class="product-icon">${icon}</div>`;
+            return `
+                <div class="product-card" id="card-${p._id}">
+                    <div class="product-info">
+                        ${visualHtml}
+                        <div class="product-name">${escapeHtml(p.name)}</div>
+                        <div class="product-brand">${escapeHtml(p.brand || 'No Brand')}</div>
+                        <div class="product-price">₹${p.price}</div>
+                        <div class="product-type">${escapeHtml(p.type)}</div>
+                    </div>
+                    <div class="product-actions">
+                        <a href="product-detail.html?id=${p._id}" class="btn btn-outline">View Details</a>
+                        <button class="btn btn-primary add-to-cart-btn" data-id="${p._id}">Add to Cart</button>
+                    </div>
                 </div>
-                <div class="product-actions">
-                    <a href="product-detail.html?id=${p._id}" class="btn btn-outline">View Details</a>
-                    <button class="btn btn-primary add-to-cart-btn" data-id="${p._id}">Add to Cart</button>
-                </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
         
         // Add Event Listeners to Add to Cart buttons
         document.querySelectorAll(".add-to-cart-btn").forEach(button => {

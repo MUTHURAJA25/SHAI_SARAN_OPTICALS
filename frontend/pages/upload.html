@@ -14,12 +14,28 @@
         <div class="upload-container">
             <!-- Left Side: Form -->
             <section class="upload-form-section">
-                <h2 class="upload-section-title">Upload New Frame</h2>
+                                <h2 class="upload-section-title" id="upload-section-title">Upload New Product</h2>
                 <form id="frame-upload-form" class="upload-form">
                     
                     <div class="form-grid">
                         <div class="field">
-                            <label for="product-name">Frame Name *</label>
+                            <label for="product-type">Product Type *</label>
+                            <select id="product-type" class="input" required>
+                                <option value="frame" selected>Frame</option>
+                                <option value="lens">Prescription Lens</option>
+                                <option value="contact-lens">Contact Lens</option>
+                            </select>
+                        </div>
+                        
+                        <div class="field">
+                            <label for="product-price">Price (₹) *</label>
+                            <input type="number" id="product-price" class="input" placeholder="e.g. 1299" min="0" required>
+                        </div>
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="field">
+                            <label id="product-name-label" for="product-name">Frame Name *</label>
                             <input type="text" id="product-name" class="input" placeholder="e.g. Classic Aviator Gold" required>
                         </div>
                         
@@ -28,57 +44,112 @@
                             <input type="text" id="product-brand" class="input" placeholder="e.g. MxK Opticals" value="MxK Opticals">
                         </div>
                     </div>
-                    
-                    <div class="form-grid">
-                        <div class="field">
-                            <label for="product-price">Price (₹) *</label>
-                            <input type="number" id="product-price" class="input" placeholder="e.g. 1299" min="0" required>
+
+                    <!-- Dynamic Attribute Sections -->
+                    <!-- 1. Frame Attributes -->
+                    <div id="frame-attrs-section" class="type-attrs">
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="product-model-number">Model Number *</label>
+                                <input type="text" id="product-model-number" class="input" placeholder="e.g. MXK-2026-F9" required>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="product-size">Size *</label>
+                                <select id="product-size" class="input" required>
+                                    <option value="" disabled selected>Select Size</option>
+                                    <option value="Small">Small</option>
+                                    <option value="Medium" selected>Medium</option>
+                                    <option value="Large">Large</option>
+                                    <option value="Custom">Custom / Free Size</option>
+                                </select>
+                            </div>
                         </div>
-                        
-                        <div class="field">
-                            <label for="product-size">Size *</label>
-                            <select id="product-size" class="input" required>
-                                <option value="" disabled selected>Select Size</option>
-                                <option value="Small">Small</option>
-                                <option value="Medium" selected>Medium</option>
-                                <option value="Large">Large</option>
-                                <option value="Custom">Custom / Free Size</option>
-                            </select>
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="product-color">Color</label>
+                                <input type="text" id="product-color" class="input" placeholder="e.g. Matte Black, Gold">
+                            </div>
+                            
+                            <div class="field">
+                                <label for="product-material">Material</label>
+                                <input type="text" id="product-material" class="input" placeholder="e.g. Acetate, Titanium">
+                            </div>
+                        </div>
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="product-shape">Shape</label>
+                                <input type="text" id="product-shape" class="input" placeholder="e.g. Rectangular, Round">
+                            </div>
+                            <div class="field"></div>
                         </div>
                     </div>
 
-                    <div class="form-grid">
-                        <div class="field">
-                            <label for="product-model-number">Model Number *</label>
-                            <input type="text" id="product-model-number" class="input" placeholder="e.g. MXK-2026-F9" required>
+                    <!-- 2. Prescription Lens Attributes -->
+                    <div id="lens-attrs-section" class="type-attrs" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="product-lens-type">Lens Design Type *</label>
+                                <select id="product-lens-type" class="input">
+                                    <option value="" disabled selected>Select Lens Type</option>
+                                    <option value="Single Vision">Single Vision (Distant/Near)</option>
+                                    <option value="Bifocal">Bifocal (With line)</option>
+                                    <option value="Progressive">Progressive (Seamless)</option>
+                                </select>
+                            </div>
+                            
+                            <div class="field">
+                                <label for="product-lens-power-range">Power Range</label>
+                                <input type="text" id="product-lens-power-range" class="input" placeholder="e.g. -0.00 to -6.00">
+                            </div>
                         </div>
-                        
-                        <div class="field">
-                            <label for="product-color">Color</label>
-                            <input type="text" id="product-color" class="input" placeholder="e.g. Matte Black, Gold">
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="product-lens-material">Material</label>
+                                <input type="text" id="product-lens-material" class="input" placeholder="e.g. CR-39, Polycarbonate">
+                            </div>
+                            
+                            <div class="field">
+                                <label for="product-lens-diameter">Diameter</label>
+                                <input type="text" id="product-lens-diameter" class="input" placeholder="e.g. 70 mm">
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-grid">
-                        <div class="field">
-                            <label for="product-material">Material</label>
-                            <input type="text" id="product-material" class="input" placeholder="e.g. Acetate, Titanium">
+                    <!-- 3. Contact Lens Attributes -->
+                    <div id="contact-lens-attrs-section" class="type-attrs" style="display: none;">
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="product-contact-power-range">Power Range</label>
+                                <input type="text" id="product-contact-power-range" class="input" placeholder="e.g. -0.50 to -8.00">
+                            </div>
+                            
+                            <div class="field">
+                                <label for="product-contact-base-curve">Base Curve (BC)</label>
+                                <input type="text" id="product-contact-base-curve" class="input" placeholder="e.g. 8.6">
+                            </div>
                         </div>
-                        
-                        <div class="field">
-                            <label for="product-shape">Shape</label>
-                            <input type="text" id="product-shape" class="input" placeholder="e.g. Rectangular, Round">
+
+                        <div class="form-grid">
+                            <div class="field">
+                                <label for="product-contact-diameter">Diameter (DIA)</label>
+                                <input type="text" id="product-contact-diameter" class="input" placeholder="e.g. 14.2">
+                            </div>
+                            <div class="field"></div>
                         </div>
                     </div>
 
                     <div class="field">
                         <label for="product-description">Description</label>
-                        <textarea id="product-description" class="textarea" placeholder="Provide a brief description of the frame..."></textarea>
+                        <textarea id="product-description" class="textarea" placeholder="Provide a brief description of the product..."></textarea>
                     </div>
 
                     <!-- Image Drop Area -->
                     <div class="field">
-                        <label>Frame Photo *</label>
+                        <label id="product-image-label">Frame Photo *</label>
                         <div class="image-dropzone" id="image-dropzone">
                             <div class="dropzone-text" id="dropzone-text">
                                 <span>📸 Click or Drag & Drop image here</span>
@@ -86,7 +157,7 @@
                             </div>
                             <input type="file" id="product-image-file" accept="image/*" style="display: none;" required>
                             <div class="image-preview-container" id="image-preview-container" style="display: none;">
-                                <img id="image-preview" src="" alt="Frame Preview">
+                                <img id="image-preview" src="" alt="Product Preview">
                                 <button type="button" class="btn btn-outline delete-preview-btn" id="delete-preview-btn">Change Image</button>
                             </div>
                         </div>

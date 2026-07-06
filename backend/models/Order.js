@@ -44,6 +44,20 @@ const orderSchema = new mongoose.Schema(
     notes: { type: String }, // e.g., prescription details
     prescription: {
       patientName: { type: String, default: "" },
+      patientAge: { type: Number },
+      lensIndex: { type: String, default: "" },
+      lensPrice: { type: Number, default: 0 },
+      lensRemarks: { type: String, default: "" },
+      // Support both dist_ prefix and plain prefix for distance powers
+      dist_od_sph: { type: String, default: "" },
+      dist_od_cyl: { type: String, default: "" },
+      dist_od_axis: { type: String, default: "" },
+      dist_od_va: { type: String, default: "" },
+      dist_os_sph: { type: String, default: "" },
+      dist_os_cyl: { type: String, default: "" },
+      dist_os_axis: { type: String, default: "" },
+      dist_os_va: { type: String, default: "" },
+      dist_pd: { type: String, default: "" },
       od_sph: { type: String, default: "" },
       od_cyl: { type: String, default: "" },
       od_axis: { type: String, default: "" },

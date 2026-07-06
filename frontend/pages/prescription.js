@@ -27,6 +27,14 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const data = JSON.parse(dataStr);
             
+            // Populate patient info
+            if (document.getElementById("patient_name") && data.patientName !== undefined) {
+                document.getElementById("patient_name").value = data.patientName;
+            }
+            if (document.getElementById("patient_age") && data.patientAge !== undefined) {
+                document.getElementById("patient_age").value = data.patientAge;
+            }
+            
             // Populate text inputs
             fields.forEach(f => {
                 const el = document.getElementById(f);
@@ -35,9 +43,18 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
             });
             
-            // Populate select
+            // Populate select fields
             if (data.lensType && lensTypeSelect) {
                 lensTypeSelect.value = data.lensType;
+            }
+            if (data.lensIndex && document.getElementById("lens-index")) {
+                document.getElementById("lens-index").value = data.lensIndex;
+            }
+            if (data.lensPrice && document.getElementById("lens-price")) {
+                document.getElementById("lens-price").value = data.lensPrice;
+            }
+            if (data.lensRemarks && document.getElementById("lens-remarks")) {
+                document.getElementById("lens-remarks").value = data.lensRemarks;
             }
             
             // Populate checkboxes
@@ -56,6 +73,9 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Clear form fields
     function clearForm() {
+        if (document.getElementById("patient_name")) document.getElementById("patient_name").value = "";
+        if (document.getElementById("patient_age")) document.getElementById("patient_age").value = "";
+        
         fields.forEach(f => {
             const el = document.getElementById(f);
             if (el) el.value = "";
@@ -63,6 +83,15 @@ document.addEventListener("DOMContentLoaded", () => {
         
         if (lensTypeSelect) {
             lensTypeSelect.selectedIndex = 0;
+        }
+        if (document.getElementById("lens-index")) {
+            document.getElementById("lens-index").selectedIndex = 0;
+        }
+        if (document.getElementById("lens-price")) {
+            document.getElementById("lens-price").value = "";
+        }
+        if (document.getElementById("lens-remarks")) {
+            document.getElementById("lens-remarks").value = "";
         }
         
         coatingIds.forEach(id => {
@@ -79,6 +108,12 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const data = {};
         
+        // Read patient name & age
+        const patientNameEl = document.getElementById("patient_name");
+        data.patientName = patientNameEl ? patientNameEl.value.trim() : "";
+        const patientAgeEl = document.getElementById("patient_age");
+        data.patientAge = patientAgeEl ? parseInt(patientAgeEl.value) || "" : "";
+        
         // Read text fields
         fields.forEach(f => {
             const el = document.getElementById(f);
@@ -91,6 +126,25 @@ document.addEventListener("DOMContentLoaded", () => {
         if (!data.lensType) {
             alert("Please select a Lens Type");
             if (lensTypeSelect) lensTypeSelect.focus();
+            return;
+        }
+        
+        // Read Lens index & price & remarks
+        const indexEl = document.getElementById("lens-index");
+        data.lensIndex = indexEl ? indexEl.value : "";
+        const priceEl = document.getElementById("lens-price");
+        data.lensPrice = priceEl ? parseFloat(priceEl.value) || 0 : 0;
+        const remarksEl = document.getElementById("lens-remarks");
+        data.lensRemarks = remarksEl ? remarksEl.value.trim() : "";
+        
+        if (!data.lensIndex) {
+            alert("Please select a Lens Index");
+            if (indexEl) indexEl.focus();
+            return;
+        }
+        if (isNaN(data.lensPrice) || data.lensPrice < 0) {
+            alert("Please enter a valid Lens Price");
+            if (priceEl) priceEl.focus();
             return;
         }
         

@@ -58,6 +58,14 @@ router.post("/create-order", async (req, res) => {
 
     const { items, totalAmount } = await buildOrderFromCart(cartItems);
 
+    let finalAmount = totalAmount;
+    if (prescription && prescription.lensPrice) {
+      const lp = parseFloat(prescription.lensPrice);
+      if (!isNaN(lp) && lp > 0) {
+        finalAmount += lp;
+      }
+    }
+
     const isRazorpayConfigured =
       process.env.RAZORPAY_KEY_ID &&
       process.env.RAZORPAY_KEY_ID !== "your_key_id" &&
@@ -69,7 +77,7 @@ router.post("/create-order", async (req, res) => {
     if (isRazorpayConfigured) {
       try {
         const options = {
-          amount: Math.round(totalAmount * 100), // convert to paise
+          amount: Math.round(finalAmount * 100), // convert to paise
           currency: "INR",
           receipt: `optical_${Date.now()}`,
           notes: {
@@ -92,7 +100,7 @@ router.post("/create-order", async (req, res) => {
     const order = await Order.create({
       customer,
       items,
-      totalAmount,
+      totalAmount: finalAmount,
       currency: "INR",
       status: "pending",
       razorpay: {
@@ -105,7 +113,7 @@ router.post("/create-order", async (req, res) => {
     res.json({
       success: true,
       orderId: order._id,
-      amount: totalAmount,
+      amount: finalAmount,
       currency: "INR",
       razorpayOrderId,
       razorpayKeyId: isMock ? "mock" : process.env.RAZORPAY_KEY_ID,

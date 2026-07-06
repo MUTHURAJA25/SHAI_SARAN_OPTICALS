@@ -26,14 +26,36 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Render Order Summary
     function renderSummary() {
-        summaryList.innerHTML = cart.map(item => `
+        let total = getCartTotal();
+        let summaryHtml = cart.map(item => `
             <li class="checkout-summary-item">
                 <span>${escapeHtml(item.name)} <strong>× ${item.quantity}</strong></span>
                 <span style="font-weight: 600;">₹${item.price * item.quantity}</span>
             </li>
         `).join('');
         
-        summaryTotal.textContent = `₹${getCartTotal()}`;
+        // Add lens price from prescription if it exists
+        try {
+            const dataStr = localStorage.getItem("saved_prescription");
+            if (dataStr) {
+                const data = JSON.parse(dataStr);
+                if (data.lensPrice && parseFloat(data.lensPrice) > 0) {
+                    const lp = parseFloat(data.lensPrice);
+                    total += lp;
+                    summaryHtml += `
+                        <li class="checkout-summary-item" style="border-top: 1px solid rgba(255,255,255,0.05); padding-top: 12px; margin-top: 8px;">
+                            <span>Prescription Lens (Index: ${escapeHtml(data.lensIndex || '1.56')})</span>
+                            <span style="font-weight: 600; color: var(--accent);">₹${lp}</span>
+                        </li>
+                    `;
+                }
+            }
+        } catch (e) {
+            console.error("Error reading lens price in checkout summary", e);
+        }
+        
+        summaryList.innerHTML = summaryHtml;
+        summaryTotal.textContent = `₹${total}`;
     }
     
     // Render Prescription Summary Card
@@ -59,8 +81,16 @@ document.addEventListener("DOMContentLoaded", () => {
             let detailsHtml = `
                 <div style="text-align: left; font-size: 0.9rem;">
                     <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 12px;">
+                        <strong>Patient:</strong>
+                        <span style="font-weight: 600; color: var(--accent);">${escapeHtml(data.patientName || 'N/A')} ${data.patientAge ? `(${escapeHtml(data.patientAge.toString())} Yrs)` : ''}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 12px;">
                         <strong>Lens Design Type:</strong>
                         <span style="color: var(--accent); font-weight: 600;">${escapeHtml(data.lensType)}</span>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 12px;">
+                        <strong>Lens Index & Price:</strong>
+                        <span style="font-weight: 600; color: var(--primary);">Index ${escapeHtml(data.lensIndex || '1.56')} | ₹${data.lensPrice || 0}</span>
                     </div>
             `;
             
@@ -101,6 +131,14 @@ document.addEventListener("DOMContentLoaded", () => {
                 `;
             }
             
+            if (data.lensRemarks) {
+                detailsHtml += `
+                    <div style="border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 12px; font-size: 0.85rem;">
+                        <strong>Custom Remarks:</strong> ${escapeHtml(data.lensRemarks)}
+                    </div>
+                `;
+            }
+            
             if (data.coatings && data.coatings.length > 0) {
                 detailsHtml += `
                     <div style="margin-top: 8px;">
@@ -132,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (confirm("Are you sure you want to remove this prescription from the order?")) {
                     localStorage.removeItem("saved_prescription");
                     renderPrescription();
+                    renderSummary();
                     showToast("Prescription details removed");
                 }
             });
