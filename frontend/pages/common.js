@@ -146,7 +146,7 @@ function injectNavbarAndFooter() {
     const footer = document.createElement("footer");
     footer.className = "footer";
     footer.innerHTML = `
-        <div class="footer-brand">MxK Opticals</div>
+        <div class="footer-brand">SHAI SARAN Opticals</div>
         <div style="margin-bottom: 8px;">Address: No 1017 A, TH Road, Kaladipet, Thiruvottriyur, Chennai - 600019, Tamilnadu | Phone: +91 9152340647</div>
         <div style="font-size: 0.8rem; color: var(--text-muted);">© 2026 MxK Opticals. All Rights Reserved.</div>
     `;
