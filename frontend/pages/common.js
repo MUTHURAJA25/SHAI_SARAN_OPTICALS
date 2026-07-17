@@ -1,5 +1,7 @@
 // Common JavaScript for Mxk Opticals Multi-Page Application
-const API_BASE = window.API_BASE_URL || "http://localhost:5000";
+const API_BASE = window.API_BASE_URL || (window.location.hostname && window.location.protocol.startsWith("http")
+    ? `${window.location.protocol}//${window.location.hostname}:5000`
+    : "http://localhost:5000");
 
 // CART UTILITIES (localStorage based)
 const CART_KEY = "optical_cart";

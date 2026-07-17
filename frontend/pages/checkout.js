@@ -180,16 +180,16 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
     
-    // Simple Input Validation to enable/disable Pay Button
+    // Simple Input Validation to style Pay Button
     function validateForm() {
         const nameVal = inputName.value.trim();
         const phoneVal = inputPhone.value.trim();
         const addressVal = inputAddress.value.trim();
         
         if (nameVal && phoneVal && addressVal) {
-            payBtn.removeAttribute("disabled");
+            payBtn.style.opacity = "1";
         } else {
-            payBtn.setAttribute("disabled", "true");
+            payBtn.style.opacity = "0.75";
         }
     }
     
@@ -332,15 +332,27 @@ document.addEventListener("DOMContentLoaded", () => {
     
     // Razorpay checkout opening
     async function startPayment() {
+        const nameVal = inputName.value.trim();
+        const phoneVal = inputPhone.value.trim();
+        const addressVal = inputAddress.value.trim();
+        
+        if (!nameVal || !phoneVal || !addressVal) {
+            showMessage("⚠️ Please fill in all required fields (Name, Phone, Address).", "error");
+            if (!nameVal) inputName.focus();
+            else if (!phoneVal) inputPhone.focus();
+            else if (!addressVal) inputAddress.focus();
+            return;
+        }
+
         payBtn.setAttribute("disabled", "true");
         payBtn.textContent = "Starting payment...";
         paymentMsg.style.display = "none";
         
         const customer = {
-            name: inputName.value.trim(),
-            phone: inputPhone.value.trim(),
+            name: nameVal,
+            phone: phoneVal,
             email: inputEmail.value.trim(),
-            address: inputAddress.value.trim()
+            address: addressVal
         };
         
         // Read prescription details from localStorage
