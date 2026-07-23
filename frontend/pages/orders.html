@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orders Dashboard - SHAI SARAN Opticals</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .order-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 25px;
+            margin-bottom: 20px;
+            transition: var(--transition);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .order-card:hover {
+            background: var(--card-hover-bg);
+            border-color: rgba(56, 189, 248, 0.2);
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.05);
+        }
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 15px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        .order-id {
+            font-family: var(--font-heading);
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+        .order-date {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        .order-status {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 12px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+        .status-paid {
+            background: rgba(16, 185, 129, 0.1);
+            color: var(--success);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+        }
+        .status-pending {
+            background: rgba(250, 204, 21, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(250, 204, 21, 0.2);
+        }
+        .status-failed {
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--error);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+        }
+        .status-cancelled {
+            background: rgba(148, 163, 184, 0.1);
+            color: var(--text-muted);
+            border: 1px solid rgba(148, 163, 184, 0.2);
+        }
+        .order-details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 15px;
+        }
+        @media (max-width: 768px) {
+            .order-details-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+        }
+        .order-section-title {
+            font-family: var(--font-heading);
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--accent);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .order-info-list {
+            list-style: none;
+        }
+        .order-info-list li {
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .order-info-label {
+            color: var(--text-muted);
+        }
+        .order-info-value {
+            font-weight: 500;
+            text-align: right;
+            max-width: 70%;
+        }
+        .order-items-list {
+            background: rgba(15, 23, 42, 0.3);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .order-item-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+        }
+        .order-item-row:last-child {
+            border-bottom: none;
+        }
+        .prescription-container {
+            background: rgba(56, 189, 248, 0.03);
+            border: 1px solid rgba(56, 189, 248, 0.15);
+            border-radius: 12px;
+            padding: 18px;
+            margin-top: 15px;
+        }
+        .power-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .power-table th, .power-table td {
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 6px;
+        }
+        .power-table th {
+            background: rgba(15, 23, 42, 0.5);
+            color: var(--text-muted);
+        }
+        .power-table td {
+            color: var(--text);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page">
+        <h1 class="section-title">Orders Dashboard</h1>
+        
+        <!-- Search and Filter Controls -->
+        <div class="filters">
+            <input type="text" id="search-orders" class="input" placeholder="Search by customer name or phone..." style="width: 100%; max-width: 450px;">
+        </div>
+
+        <div id="loading-state" class="empty-state" style="display: none;">
+            Fetching order records...
+        </div>
+        
+        <div id="error-state" class="empty-state" style="display: none; border-color: var(--error); color: var(--error);">
+            Failed to load orders. Please make sure the backend server is running.
+        </div>
+
+        <div id="empty-state" class="empty-state" style="display: none;">
+            No orders found matching your search.
+        </div>
+
+        <!-- Orders Container -->
+        <div id="orders-list">
+            <!-- Dynamically populated via orders.js -->
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="common.js"></script>
+    <script src="orders.js"></script>
+</body>
+</html>

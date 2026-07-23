@@ -6,10 +6,24 @@ const Order = require("../models/Order");
 
 const router = express.Router();
 
-const razorpayInstance = new Razorpay({
-  key_id: process.env.RAZORPAY_KEY_ID || "",
-  key_secret: process.env.RAZORPAY_KEY_SECRET || "",
-});
+const isRazorpayConfigured =
+  process.env.RAZORPAY_KEY_ID &&
+  process.env.RAZORPAY_KEY_ID !== "your_key_id" &&
+  process.env.RAZORPAY_KEY_SECRET &&
+  process.env.RAZORPAY_KEY_SECRET !== "your_key_secret";
+
+let razorpayInstance = null;
+if (isRazorpayConfigured) {
+  try {
+    razorpayInstance = new Razorpay({
+      key_id: process.env.RAZORPAY_KEY_ID,
+      key_secret: process.env.RAZORPAY_KEY_SECRET,
+    });
+  } catch (err) {
+    console.error("Failed to initialize Razorpay:", err.message);
+  }
+}
+
 
 // Helper to calculate totals and build order items
 async function buildOrderFromCart(cartItems = []) {
@@ -74,7 +88,7 @@ router.post("/create-order", async (req, res) => {
 
     let razorpayOrderId = "";
 
-    if (isRazorpayConfigured) {
+    if (isRazorpayConfigured && razorpayInstance) {
       try {
         const options = {
           amount: Math.round(finalAmount * 100), // convert to paise

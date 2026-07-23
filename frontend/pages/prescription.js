@@ -34,6 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (document.getElementById("patient_age") && data.patientAge !== undefined) {
                 document.getElementById("patient_age").value = data.patientAge;
             }
+            if (document.getElementById("patient_gender") && data.patientGender !== undefined) {
+                document.getElementById("patient_gender").value = data.patientGender;
+            }
             
             // Populate text inputs
             fields.forEach(f => {
@@ -75,6 +78,7 @@ document.addEventListener("DOMContentLoaded", () => {
     function clearForm() {
         if (document.getElementById("patient_name")) document.getElementById("patient_name").value = "";
         if (document.getElementById("patient_age")) document.getElementById("patient_age").value = "";
+        if (document.getElementById("patient_gender")) document.getElementById("patient_gender").selectedIndex = 0;
         
         fields.forEach(f => {
             const el = document.getElementById(f);
@@ -108,11 +112,13 @@ document.addEventListener("DOMContentLoaded", () => {
         
         const data = {};
         
-        // Read patient name & age
+        // Read patient name, age & gender
         const patientNameEl = document.getElementById("patient_name");
         data.patientName = patientNameEl ? patientNameEl.value.trim() : "";
         const patientAgeEl = document.getElementById("patient_age");
         data.patientAge = patientAgeEl ? parseInt(patientAgeEl.value) || "" : "";
+        const patientGenderEl = document.getElementById("patient_gender");
+        data.patientGender = patientGenderEl ? patientGenderEl.value : "";
         
         // Read text fields
         fields.forEach(f => {

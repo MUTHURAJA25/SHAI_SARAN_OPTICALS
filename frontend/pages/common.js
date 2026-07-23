@@ -134,6 +134,7 @@ function injectNavbarAndFooter() {
             <a href="lenses.html" class="nav-link" id="nav-lenses">Lenses</a>
             <a href="contact.html" class="nav-link" id="nav-contact">Contact</a>
             <a href="upload.html" class="nav-link" id="nav-upload">Upload Frames</a>
+            <a href="orders.html" class="nav-link" id="nav-orders">Orders</a>
             <a href="cart.html" class="nav-link nav-cart" id="nav-cart">
                 🛒 Cart
                 <span class="nav-cart-count" id="cart-badge" style="display: none;">0</span>
@@ -168,6 +169,8 @@ function injectNavbarAndFooter() {
         document.getElementById("nav-contact").classList.add("active");
     } else if (pageName === "upload.html") {
         document.getElementById("nav-upload").classList.add("active");
+    } else if (pageName === "orders.html") {
+        document.getElementById("nav-orders").classList.add("active");
     } else if (pageName === "cart.html" || pageName === "checkout.html") {
         document.getElementById("nav-cart").classList.add("active");
     }

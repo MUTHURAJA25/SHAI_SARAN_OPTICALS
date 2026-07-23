@@ -45,6 +45,7 @@ const orderSchema = new mongoose.Schema(
     prescription: {
       patientName: { type: String, default: "" },
       patientAge: { type: Number },
+      patientGender: { type: String, default: "" },
       lensIndex: { type: String, default: "" },
       lensPrice: { type: Number, default: 0 },
       lensRemarks: { type: String, default: "" },

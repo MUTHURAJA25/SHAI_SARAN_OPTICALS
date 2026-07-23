@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div style="text-align: left; font-size: 0.9rem;">
                     <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 12px;">
                         <strong>Patient:</strong>
-                        <span style="font-weight: 600; color: var(--accent);">${escapeHtml(data.patientName || 'N/A')} ${data.patientAge ? `(${escapeHtml(data.patientAge.toString())} Yrs)` : ''}</span>
+                        <span style="font-weight: 600; color: var(--accent);">${escapeHtml(data.patientName || 'N/A')} ${data.patientAge ? `(${escapeHtml(data.patientAge.toString())} Yrs${data.patientGender ? ` / ${escapeHtml(data.patientGender)}` : ''})` : ''}</span>
                     </div>
                     <div style="display: flex; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; margin-bottom: 12px;">
                         <strong>Lens Design Type:</strong>

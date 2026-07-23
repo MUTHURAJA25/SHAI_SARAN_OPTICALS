@@ -13,7 +13,15 @@ const MONGO_URI =
 
 mongoose
   .connect(MONGO_URI)
-  .then(() => console.log("Connected to MongoDB"))
+  .then(async () => {
+    console.log("Connected to MongoDB");
+    try {
+      const seedDatabase = require("./config/seed");
+      await seedDatabase();
+    } catch (seedErr) {
+      console.error("Database seeding failed:", seedErr);
+    }
+  })
   .catch((err) => {
     console.error("Mongo connection error", err);
     process.exit(1);
